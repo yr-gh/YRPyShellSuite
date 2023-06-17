@@ -100,11 +100,7 @@ def del_invalid_files(files, empty_error = True):
     files: a collection object of files.
     
     empty_error: if `True`, raising `ValueError` when the `files` is empty after removing all invalid files."""
-    files = files.copy()
-
-    for i in range(0, len(files)):
-        if not os.path.isfile(files[i]):
-            del files[i]
+    files = [i for i in files if os.path.isfile(i)]
     
     if empty_error and len(files) == 0:
         raise ValueError('No valid files exist after removing all invalid files!')
@@ -117,11 +113,7 @@ def del_invalid_dirs(dirs, empty_error = True):
     dirs: a collection object of directories.
     
     empty_error: if `True`, raising `ValueError` when the `dirs` is empty after removing all invalid directories."""
-    dirs = dirs.copy()
-    
-    for i in range(0, len(dirs)):
-        if not os.path.isdir(dirs[i]):
-            del dirs[i]
+    dirs = [i for i in dirs if os.path.isdir(i)]
     
     if empty_error and len(dirs) == 0:
         raise ValueError('No valid directories exist after removing all invalid directories!')
